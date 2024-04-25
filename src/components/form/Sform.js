@@ -71,18 +71,12 @@ const Form = () => {
   const submit = (e) => {
     e.preventDefault()
     const errors = {}
-    if (name === '')
-      errors.name = 'Name is required!'
-
+    if (name === '') errors.name = 'Name is required!'
     if (email === '') errors.email = 'Email is required!'
     else if (!/\S+@\S+\.\S+/.test(email)) errors.email = 'Email is not valid!'
-
     if (dob === null) errors.dob = 'Date of Birth is required!'
-
     if (number.toString().length < 10) errors.number = 'Contact number must be 10 digits long!'
-
     if (selected_food.length === 0) errors.food = 'Please select atleast one option!'
-
     if (optRow1 === 0 || optRow2 === 0 || optRow3 === 0 || optRow4 === 0) errors.hobies = 'Please select option from each row!'
 
     setErr(errors)
@@ -96,7 +90,7 @@ const Form = () => {
         loa: { movies: parseInt(optRow1), radio: parseInt(optRow2), eat_out: parseInt(optRow3), tv: parseInt(optRow4) }
       })
         .catch((e) => { console.log(e.message) })
-        navigate('/typ')
+      navigate('/typ')
     }
   }
   const navigate = useNavigate()
@@ -144,7 +138,7 @@ const Form = () => {
                           ? err.number
                           : ''}</span>}
                   {() => { return (<div>dd</div>) }}
-                </div> : <DatePicker placeholderText='31/12/1904' dropdownMode="select" showMonthDropdown showYearDropdown minDate={new Date('1904-01-01')} maxDate={new Date('2019-01-31')}  selected={dob} onChange={pd_functions[i]} value={dob} />
+                </div> : <DatePicker placeholderText='31/12/1904' dropdownMode="select" showMonthDropdown showYearDropdown minDate={new Date('1904-01-01')} maxDate={new Date('2019-01-31')} selected={dob} onChange={pd_functions[i]} value={dob} />
             )
           })}
         </div>
