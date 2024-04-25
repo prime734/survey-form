@@ -1,0 +1,23 @@
+.survey-results{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    column-gap: 10rem;
+    /* margin: 5rem 0 */
+  }
+
+  .survey-results-container{
+    padding: 0 5rem
+  }
+
+  .results-div{
+    margin-bottom: .5rem;
+  }
+
+  .survey-results-container h3{
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .survey-results-container p{
+   text-align: center; 
+  }

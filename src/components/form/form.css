@@ -1,0 +1,79 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+  }
+  *{
+    font-family: 'Roboto', sans-serif;
+  }
+  .App {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5rem;
+  }
+  
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  
+  .input-checkbox {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    row-gap: 3rem;
+  }
+  
+  .checkboxes {
+    display: flex;
+    gap: .5em;
+  
+  }
+  
+  .checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .table{
+    margin-top:3rem
+  }
+
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: start;
+  }
+  
+  table{
+    width: 70%;
+  }
+  th{
+    padding:0 .3rem
+  }
+  
+  input {
+    outline: none;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0 .5rem;
+    font-size: .9rem
+  }
+  
+  button {
+    width: 100px;
+    align-self: center;
+    margin-top: 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 2rem;
+    background-color: rgba(76, 190, 58, 0.779)
+  }
+
+  span{
+    font-size: .8rem;
+    color:red
+  }
