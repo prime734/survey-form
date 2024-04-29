@@ -36,7 +36,7 @@ const Sresults = () => {
         let tv_count = 0
 
         for (let i = 0; i < results.length; i++) {
-            let dob = new Date((results[i].dob.seconds + results[i].dob.nanoseconds / 1000000000) * 1000)
+            let dob = new Date(results[i].dob)
             sum_ages += 2024 - dob.getFullYear()
             ages.push(2024 - dob.getFullYear())
 

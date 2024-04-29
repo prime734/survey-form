@@ -1,83 +1,87 @@
 .input {
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-  }
-  *{
-    font-family: 'Roboto', sans-serif;
-  }
-  .App {
-    display: flex;
-    flex-direction: column;
-    margin: 0 5rem;
-  }
-  
-  .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem;
-  }
-  
-  .input-checkbox {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    row-gap: 3rem;
-  }
-  
-  .checkboxes {
-    display: flex;
-    gap: .5em;
-  
-  }
-  
-  .checkbox {
-    display: flex;
-    align-items: center;
-  }
-  
-  .table{
-    margin-top:3rem
-  }
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
 
-  table,
-  th,
-  td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: start;
-  }
-  thead tr{
-    height:3rem;
-    background-color:rgba(128, 128, 128, 0.345)
-  }
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
-  table{
-    width: 70%;
-  }
-  th{
-    padding:0 .3rem
-  }
-  
-  input {
-    outline: none;
-    height: 30px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0 .5rem;
-    font-size: .9rem
-  }
-  
-  button {
-    width: 100px;
-    align-self: center;
-    margin-top: 1rem;
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 2rem;
-    background-color: rgba(128, 128, 128, 0.345)
-  }
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 5rem;
+}
 
-  span{
-    font-size: .8rem;
-    color:red
-  }
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.input-checkbox {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 3rem;
+}
+
+.checkboxes {
+  display: flex;
+  gap: .5em;
+
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.table {
+  margin-top: 3rem
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: start;
+}
+
+thead tr {
+  height: 3rem;
+  background-color: rgba(128, 128, 128, 0.345)
+}
+
+table {
+  width: 70%;
+}
+
+th {
+  padding: 0 .3rem
+}
+
+input {
+  outline: none;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0 .5rem;
+  font-size: .9rem
+}
+
+button {
+  width: 100px;
+  align-self: center;
+  margin-top: 1rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 2rem;
+  background-color: rgba(128, 128, 128, 0.345)
+}
+
+span {
+  font-size: .8rem;
+  color: red
+}

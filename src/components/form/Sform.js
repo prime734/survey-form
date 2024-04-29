@@ -1,93 +1,61 @@
 import React, { useState } from 'react';
 import db from '../../firebase'
 import { collection, addDoc } from 'firebase/firestore';
-import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import './form.css'
 import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [dob, setDob] = useState(null)
-  const [number, setNumber] = useState(0)
 
-  const [pizza, setPizza] = useState('')
-  const [pasta, setPasta] = useState('')
-  const [papAndWors, setPapAndWors] = useState('')
-  const [other, setOther] = useState('')
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    dob: '',
+    number: 0,
+    pizza: '',
+    pasta: '',
+    papAndWors: '',
+    other: '',
+    optRow1: 0,
+    optRow2: 0,
+    optRow3: 0,
+    optRow4: 0
+  })
 
-  const [optRow1, setOptRow1] = useState(0)
-  const [optRow2, setOptRow2] = useState(0)
-  const [optRow3, setOptRow3] = useState(0)
-  const [optRow4, setOptRow4] = useState(0)
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setData({ ...data, [name]: value })
+    console.log(data)
+  }
 
   const [err, setErr] = useState({})
 
-  const handleName = (event) => {
-    setName(event.target.value)
-  }
-  const handleEmail = (event) => {
-    setEmail(event.target.value)
-  }
-  const handleDob = (event) => {
-    setDob(event)
-  }
-  const handleNumber = (event) => {
-    setNumber(event.target.value)
-  }
-
-  const handlePizza = (event) => {
-    setPizza(event.target.value)
-  }
-  const handlePasta = (event) => {
-    setPasta(event.target.value)
-  }
-  const handlePapAndWors = (event) => {
-    setPapAndWors(event.target.value)
-  }
-  const handleOther = (event) => {
-    setOther(event.target.value)
-  }
-
-  const handleRow1 = (event) => {
-    setOptRow1(event.target.value)
-  }
-  const handleRow2 = (event) => {
-    setOptRow2(event.target.value)
-  }
-  const handleRow3 = (event) => {
-    setOptRow3(event.target.value)
-  }
-  const handleRow4 = (event) => {
-    setOptRow4(event.target.value)
-  }
   let selected_food = []
-  if (pizza !== '') selected_food.push("Pizza")
-  if (pasta !== '') selected_food.push("Pasta")
-  if (papAndWors !== '') selected_food.push("Pap and Wors")
-  if (other !== '') selected_food.push("Other")
+  if (data.pizza !== '') selected_food.push("Pizza")
+  if (data.pasta !== '') selected_food.push("Pasta")
+  if (data.papAndWors !== '') selected_food.push("Pap and Wors")
+  if (data.other !== '') selected_food.push("Other")
 
   const submit = (e) => {
     e.preventDefault()
     const errors = {}
-    if (name === '') errors.name = 'Name is required!'
-    if (email === '') errors.email = 'Email is required!'
-    else if (!/\S+@\S+\.\S+/.test(email)) errors.email = 'Email is not valid!'
-    if (dob === null) errors.dob = 'Date of Birth is required!'
-    if (number.toString().length < 10) errors.number = 'Contact number must be 10 digits long!'
+    if (data.name === '') errors.name = 'Name is required!'
+    if (data.email === '') errors.email = 'Email is required!'
+    else if (!/\S+@\S+\.\S+/.test(data.email)) errors.email = 'Email is not valid!'
+    if (data.dob === '') errors.dob = 'Date of birth is required!'
+    if (!/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/.test(data.number)) errors.number = 'Invalid phone number!'
     if (selected_food.length === 0) errors.food = 'Please select atleast one option!'
-    if (optRow1 === 0 || optRow2 === 0 || optRow3 === 0 || optRow4 === 0) errors.hobies = 'Please select option from each row!'
+    if (data.optRow1 === 0 || data.optRow2 === 0 || data.optRow3 === 0 || data.optRow4 === 0) errors.hobies = 'Please select option from each row!'
 
     setErr(errors)
     if (Object.keys(errors).length === 0) {
       addDoc(collection(db, "surveyData"), {
-        name: name,
-        email: email,
-        dob: dob,
-        number: number,
+        name: data.name,
+        email: data.email,
+        dob: data.dob,
+        number: parseInt(data.number),
         selected_food: selected_food,
-        loa: { movies: parseInt(optRow1), radio: parseInt(optRow2), eat_out: parseInt(optRow3), tv: parseInt(optRow4) }
+        loa: { movies: parseInt(data.optRow1), radio: parseInt(data.optRow2), eat_out: parseInt(data.optRow3), tv: parseInt(data.optRow4) }
       })
         .catch((e) => { console.log(e.message) })
       navigate('/typ')
@@ -96,49 +64,39 @@ const Form = () => {
   const navigate = useNavigate()
 
   const personal_details = ['Full Names', 'Email', 'Date of Birth', 'Contact Number']
-  const pd_functions = [handleName, handleEmail, handleDob, handleNumber,]
+  const input_names = ['name', 'email', 'dob', 'number']
 
-  const food = ['Pizza', 'Pasta', 'Pap and Worse', 'Other']
-  const food_functions = [handlePizza, handlePasta, handlePapAndWors, handleOther]
+  const food = ['Pizza', 'Pasta', 'Pap and Wors', 'Other']
+  const food_names = ['pizza', 'pasta', 'papAndWors', 'other']
 
   const hobies = ['I like to watch movies', 'I like to listen to radio', 'I like to eat out', 'I like to watch TV']
   const agreement = ['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree']
   const agreement_value = [1, 2, 3, 4, 5]
-  const row_functions = [handleRow1, handleRow2, handleRow3, handleRow4]
+  const placeholders = ['Prime', 'prime@gmail.com', '1904-12-31', '0123456789']
 
   return (
-    <form onSubmit={submit} className="App">
-      <nav>
-
-      </nav>
+    <form onSubmit={submit} className="form">
       <div className="input-checkbox">
 
         <div>Personal Details:</div>
         <div className='inputs'>
           {personal_details.map((pd, i) => {
             return (
-              i !== 2 ?
-                <div className='input'>
-                  <label >{pd}</label>
-                  <input placeholder={
-                    i === 0
-                      ? 'Prime'
-                      : i === 1
-                        ? 'prime@gmail.com'
-                        : i === 3
-                          ? '0123456789'
-                          : ''
-                  } onChange={pd_functions[i]} />
-                  {<span>{
-                    i === 0
-                      ? err.name
-                      : i === 1
-                        ? err.email
+              <div className='input'>
+                <label >{pd}</label>
+                <input placeholder={placeholders[i]} type={i === 2 ? 'date' : 'text'}
+                  min='1904-01-01' max='2019-12-31' name={input_names[i]} onChange={handleChange} />
+                {<span>{
+                  i === 0
+                    ? err.name
+                    : i === 1
+                      ? err.email
+                      : i === 2
+                        ? err.dob
                         : i === 3
                           ? err.number
                           : ''}</span>}
-                  {() => { return (<div>dd</div>) }}
-                </div> : <DatePicker placeholderText='31/12/1904' dropdownMode="select" showMonthDropdown showYearDropdown minDate={new Date('1904-01-01')} maxDate={new Date('2019-01-31')} selected={dob} onChange={pd_functions[i]} value={dob} />
+              </div>
             )
           })}
         </div>
@@ -152,7 +110,7 @@ const Form = () => {
           {food.map((f, i) => {
             return (
               <div className='checkbox'>
-                <input onChange={food_functions[i]} selected={f} type='checkbox' name={f} value={f} />
+                <input onChange={handleChange} selected={f} type='checkbox' name={food_names[i]} value={f} />
                 <label>{f}</label>
               </div>
             )
@@ -181,7 +139,7 @@ const Form = () => {
                   <th>{h}</th>
                   {agreement.map((a, j) => {
                     return (
-                      <td><input onChange={row_functions[i]} type="radio" name={"row1" + i} value={agreement_value[j]} /></td>
+                      <td><input onChange={handleChange} type="radio" name={"optRow" + parseInt(i + 1)} value={agreement_value[j]} /></td>
                     )
                   })}
                 </tr>

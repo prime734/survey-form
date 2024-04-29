@@ -5,12 +5,12 @@ nav{
     margin-bottom: 1rem;
 }
 
-ul{
+nav ul{
     list-style: none;
     display: flex;
     gap:1rem
 }
-a{
+nav a{
     text-decoration: none;
     color:black
 }
